@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Bhavya Upadhyay — Portfolio
 
-## Getting Started
+Personal portfolio for a Data Engineer job hunt. Next.js (App Router) + TypeScript + Tailwind v4.
+Dark, mobile-first, server-rendered. Built to convert a skeptical technical recruiter in the first
+30 seconds, then make it effortless to go deeper into the two flagship projects and download the résumé.
 
-First, run the development server:
+## Develop
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev      # http://localhost:3000
+npm run build    # production build (all routes prerender to static)
+npm run start    # serve the production build
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Architecture decisions (why it's fast)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Server-first.** Every section is a React Server Component shipping zero client JS. Only `Nav`
+  (sticky/scroll state + mobile menu) and `Reveal` (scroll-in animation) are client components, so
+  first-load JS stays at the framework baseline as the site grows.
+- **No Mermaid / no chart libs.** Architecture diagrams are hand-built, dependency-free
+  (`components/diagrams/`) — same information, no heavy client bundle.
+- **No Framer Motion.** Reveals use a tiny `IntersectionObserver` + CSS. The hidden→visible state
+  only applies under `html.js` (set by a pre-paint inline script in `app/layout.tsx`), so with
+  **JavaScript disabled the page is fully visible and readable.** `prefers-reduced-motion` disables
+  all motion in `app/globals.css`.
+- **Design tokens** live in `app/globals.css` (`@theme`). Muted/faint text colors are chosen to
+  clear WCAG AA contrast on the near-black background.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Content
 
-## Learn More
+All copy is in `lib/data.ts` — one source of truth for hero, stats, projects, experience, skills,
+and contact. Edit there, not in components.
 
-To learn more about Next.js, take a look at the following resources:
+## ⚠️ Assets to replace before launch
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+These are placeholders or need real files dropped in:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. **`public/Bhavya_Upadhyay_Resume_Updated.pdf`** — currently a generated **placeholder**.
+   Replace with the real résumé PDF (same filename, no code change needed).
+2. **Flagship dashboard screenshots** — not yet added. The spec calls for 2–3 from each live
+   dashboard (EDGAR-X: company explorer, calibration, sector overview; Flightline:
+   `assets/dashboard.png`, `assets/routes.png`). Drop them in `public/` and wire into
+   `components/sections/Projects.tsx` if you want them inline.
 
-## Deploy on Vercel
+## Open `[CONFIRM]` items from the spec
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Flightline live demo URL** — currently labeled "Demo: run locally" (links to the repo README).
+  If you host it on Streamlit, add the URL to the Flightline `links` array in `lib/data.ts`.
+- **Optional sections not built** (off the current résumé, per spec — add only if you opt in):
+  Live Good Inc. research role; publications (YOLOv8 construction-site detection; crypto
+  forecasting). Need confirmed links before adding.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## SEO
+
+- Per-page metadata + canonical in `app/layout.tsx`.
+- Open Graph + Twitter card image generated at build by `app/opengraph-image.tsx` (sharp 1200×630 PNG).
+- JSON-LD `Person` schema (jobTitle Data Engineer, alumniOf UC Irvine, sameAs GitHub/LinkedIn).
+- `app/sitemap.ts`, `app/robots.ts`. Update `site.url` in `lib/data.ts` if the domain changes.
+
+## Deploy
+
+Zero-config on **Vercel** (recommended) or **Cloudflare Pages**. Static output; no env vars, no
+server runtime, no trackers. Point `bhavyaupadhyay.site` at the deployment.
