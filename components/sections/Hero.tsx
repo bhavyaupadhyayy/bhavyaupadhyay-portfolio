@@ -1,16 +1,37 @@
+import Image from "next/image";
 import { site, stats } from "@/lib/data";
 
 export default function Hero() {
   return (
     <section
       id="top"
-      className="relative overflow-hidden px-5 pb-16 pt-28 sm:px-8 sm:pb-24 sm:pt-36"
+      className="relative overflow-hidden bg-bg px-5 pb-16 pt-28 sm:px-8 sm:pb-24 sm:pt-36"
     >
-      {/* Single static backdrop — no JS, no animation, GPU-cheap. */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 bg-aurora" />
+      {/* Static backdrop — no JS, no animation, GPU-cheap.
+         Accent glow is biased to the text side (see .hero-aurora @ ≥781px). */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 hero-aurora min-[781px]:right-[56%]" />
       <div aria-hidden className="pointer-events-none absolute inset-0 bg-grid" />
 
-      <div className="relative mx-auto w-full max-w-5xl">
+      {/* Supporting photo — right 58% on desktop, faint full-bleed under text on mobile.
+         Masked to fade edge-free into the flat dark background. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-30 min-[781px]:inset-auto min-[781px]:right-0 min-[781px]:top-0 min-[781px]:h-full min-[781px]:w-[58%] min-[781px]:opacity-100"
+      >
+        <Image
+          src="/bhavya-hero.jpg"
+          alt=""
+          fill
+          priority
+          sizes="(max-width: 780px) 100vw, 58vw"
+          className="hero-photo-img"
+        />
+      </div>
+
+      {/* Film grain across the whole hero — unifies photo + background. */}
+      <div aria-hidden className="hero-grain pointer-events-none absolute inset-0" />
+
+      <div className="relative z-10 mx-auto w-full max-w-5xl">
         <p
           className="hero-fade mb-5 inline-flex items-center gap-2 rounded-full border border-line-strong/70 bg-surface-2/50 px-3 py-1 font-mono text-xs text-muted"
           style={{ animationDelay: "0ms" }}
