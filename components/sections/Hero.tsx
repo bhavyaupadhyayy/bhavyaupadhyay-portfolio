@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { site, stats } from "@/lib/data";
+import TerminalLauncher from "@/components/TerminalLauncher";
 
 export default function Hero() {
   return (
@@ -77,6 +78,7 @@ export default function Hero() {
           >
             Download résumé
           </a>
+          <TerminalLauncher />
         </div>
 
         {/* Stats — real, verified, no application counts. */}
