@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import type { ReactNode } from "react";
 
 type Line = { id: number; node: ReactNode };
@@ -257,7 +258,7 @@ export default function TerminalModal({ onClose }: { onClose: () => void }) {
     inputRef.current?.focus();
   };
 
-  return (
+  return createPortal(
     <div
       className="fixed inset-0 z-[100] flex items-end justify-center p-3 sm:items-center sm:p-6"
       role="presentation"
@@ -267,7 +268,7 @@ export default function TerminalModal({ onClose }: { onClose: () => void }) {
         type="button"
         aria-label="Close terminal"
         onClick={onClose}
-        className="absolute inset-0 cursor-default bg-black/70 backdrop-blur-sm"
+        className="absolute inset-0 h-full w-full cursor-default bg-black/80 backdrop-blur-md"
         tabIndex={-1}
       />
 
@@ -356,6 +357,7 @@ export default function TerminalModal({ onClose }: { onClose: () => void }) {
           ))}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
