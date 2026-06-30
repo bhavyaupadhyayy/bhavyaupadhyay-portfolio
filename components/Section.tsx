@@ -10,26 +10,26 @@ type SectionProps = {
   className?: string;
 };
 
-export function Section({ id, eyebrow, title, intro, children, className }: SectionProps) {
+// `eyebrow` is accepted for compatibility but intentionally not rendered —
+// per-section uppercase kickers are an AI scaffold. Cadence comes from the
+// heading scale and spacing rhythm instead.
+export function Section({ id, title, intro, children, className }: SectionProps) {
   return (
     <section
       id={id}
-      className={`scroll-mt-20 border-t border-line/70 px-5 py-20 sm:px-8 sm:py-28 ${className ?? ""}`}
+      className={`scroll-mt-24 px-5 py-24 sm:px-8 sm:py-32 ${className ?? ""}`}
     >
       <div className="mx-auto w-full max-w-5xl">
-        {(eyebrow || title) && (
-          <Reveal as="header" className="mb-12 max-w-2xl sm:mb-16">
-            {eyebrow && (
-              <p className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-accent">
-                {eyebrow}
+        {title && (
+          <Reveal as="header" className="mb-14 max-w-2xl sm:mb-20">
+            <h2 className="font-display text-[2rem] font-semibold leading-[1.06] tracking-[-0.02em] text-fg sm:text-[2.75rem]">
+              {title}
+            </h2>
+            {intro && (
+              <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-muted sm:text-lg">
+                {intro}
               </p>
             )}
-            {title && (
-              <h2 className="font-display text-3xl font-semibold tracking-tight text-fg sm:text-4xl">
-                {title}
-              </h2>
-            )}
-            {intro && <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">{intro}</p>}
           </Reveal>
         )}
         {children}

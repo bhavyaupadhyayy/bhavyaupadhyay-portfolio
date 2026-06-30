@@ -14,7 +14,7 @@ export default function Skills() {
               group.group === "Data & Analytics" ? "sm:col-span-2" : ""
             }`}
           >
-            <h3 className="mb-3 font-mono text-xs uppercase tracking-[0.18em] text-accent">
+            <h3 className="mb-3 font-mono text-xs tracking-tight text-accent">
               {group.group}
             </h3>
             <div className="flex flex-wrap gap-2">

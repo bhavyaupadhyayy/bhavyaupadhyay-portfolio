@@ -1,22 +1,25 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Archivo, Hanken_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/data";
 
-const sans = Inter({
-  variable: "--font-sans",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
-
-const display = Space_Grotesk({
+// Display: Archivo — an engineered grotesque with a wide, instrument-panel cut.
+const display = Archivo({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["500", "600", "700", "800"],
   display: "swap",
 });
 
+// Body: Hanken Grotesk — neutral, high x-height, reads calm at small sizes.
+const sans = Hanken_Grotesk({
+  variable: "--font-sans",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
+});
+
+// Mono: JetBrains — literal here (the terminal, data readouts), not costume.
 const mono = JetBrains_Mono({
   variable: "--font-mono",
   subsets: ["latin"],

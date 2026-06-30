@@ -48,7 +48,7 @@ export default function Contact() {
                   rel={l.href.startsWith("http") ? "noopener noreferrer" : undefined}
                   className="group flex items-center justify-between gap-4 px-5 py-4 transition-colors hover:bg-surface-2/50"
                 >
-                  <dt className="font-mono text-xs uppercase tracking-[0.16em] text-faint">
+                  <dt className="font-mono text-xs tracking-tight text-faint">
                     {l.label}
                   </dt>
                   <dd className="truncate text-sm text-fg transition-colors group-hover:text-accent">
