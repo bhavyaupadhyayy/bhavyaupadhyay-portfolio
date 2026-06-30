@@ -68,28 +68,31 @@ function FlagshipCase({ p, index }: { p: Flagship; index: number }) {
       <div className="grid gap-8 p-6 sm:p-8 lg:grid-cols-[1.1fr_0.9fr]">
         <div className="space-y-8">
           <div>
-            <h4 className="mb-2 font-mono text-xs uppercase tracking-[0.18em] text-faint">
+            <h4 className="mb-2 font-mono text-[11px] tracking-tight text-faint">
               Problem &amp; constraint
             </h4>
             <p className="text-[15px] leading-relaxed text-muted">{p.problem}</p>
           </div>
 
           <div>
-            <h4 className="mb-3 font-mono text-xs uppercase tracking-[0.18em] text-faint">
+            <h4 className="mb-3 font-mono text-[11px] tracking-tight text-faint">
               Architecture
             </h4>
             {diagrams[p.slug]}
           </div>
 
           <div>
-            <h4 className="mb-3 font-mono text-xs uppercase tracking-[0.18em] text-faint">
+            <h4 className="mb-3 font-mono text-[11px] tracking-tight text-faint">
               Challenges &amp; solutions
             </h4>
             <ul className="space-y-4">
               {p.challenges.map((c) => (
-                <li key={c.title} className="border-l-2 border-line-strong pl-4">
-                  <p className="text-sm font-semibold text-fg">{c.title}</p>
-                  <p className="mt-1 text-sm leading-relaxed text-muted">{c.body}</p>
+                <li key={c.title}>
+                  <p className="flex gap-2 text-sm font-semibold text-fg">
+                    <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" />
+                    {c.title}
+                  </p>
+                  <p className="mt-1 pl-3 text-sm leading-relaxed text-muted">{c.body}</p>
                 </li>
               ))}
             </ul>
@@ -98,7 +101,7 @@ function FlagshipCase({ p, index }: { p: Flagship; index: number }) {
 
         <div className="space-y-8">
           <div>
-            <h4 className="mb-3 font-mono text-xs uppercase tracking-[0.18em] text-faint">
+            <h4 className="mb-3 font-mono text-[11px] tracking-tight text-faint">
               Results
             </h4>
             <dl className="space-y-px overflow-hidden rounded-xl border border-line bg-line">
@@ -114,7 +117,7 @@ function FlagshipCase({ p, index }: { p: Flagship; index: number }) {
           </div>
 
           <div>
-            <h4 className="mb-3 font-mono text-xs uppercase tracking-[0.18em] text-faint">
+            <h4 className="mb-3 font-mono text-[11px] tracking-tight text-faint">
               Tech stack
             </h4>
             <div className="flex flex-wrap gap-2">
@@ -125,8 +128,8 @@ function FlagshipCase({ p, index }: { p: Flagship; index: number }) {
           </div>
 
           {p.honesty && (
-            <div className="rounded-xl border border-accent-2/25 bg-[rgba(129,140,248,0.06)] p-4">
-              <p className="mb-1.5 flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.16em] text-accent-2">
+            <div className="rounded-xl border border-accent/25 bg-[rgba(244,168,58,0.06)] p-4">
+              <p className="mb-1.5 flex items-center gap-1.5 font-mono text-[11px] tracking-tight text-accent">
                 <span aria-hidden>◆</span> Deployment status
               </p>
               <p className="text-[13px] leading-relaxed text-muted">{p.honesty}</p>

@@ -1,6 +1,6 @@
-import Image from "next/image";
 import { site, stats } from "@/lib/data";
 import TerminalLauncher from "@/components/TerminalLauncher";
+import PipelineHero from "@/components/PipelineHero";
 
 export default function Hero() {
   return (
@@ -13,23 +13,16 @@ export default function Hero() {
       <div aria-hidden className="pointer-events-none absolute inset-0 hero-aurora min-[781px]:right-[56%]" />
       <div aria-hidden className="pointer-events-none absolute inset-0 bg-grid" />
 
-      {/* Supporting photo — right 58% on desktop, faint full-bleed under text on mobile.
-         Masked to fade edge-free into the flat dark background. */}
+      {/* Live data pipeline — the hero centerpiece. Right 60% on desktop,
+         faint animated full-bleed backdrop on mobile. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-30 min-[781px]:inset-auto min-[781px]:right-0 min-[781px]:top-0 min-[781px]:h-full min-[781px]:w-[58%] min-[781px]:opacity-100"
+        className="pointer-events-none absolute inset-0 opacity-[0.45] min-[781px]:inset-auto min-[781px]:right-0 min-[781px]:top-0 min-[781px]:h-full min-[781px]:w-[60%] min-[781px]:opacity-100"
       >
-        <Image
-          src="/bhavya-hero.jpg"
-          alt=""
-          fill
-          priority
-          sizes="(max-width: 780px) 100vw, 58vw"
-          className="hero-photo-img"
-        />
+        <PipelineHero />
       </div>
 
-      {/* Film grain across the whole hero — unifies photo + background. */}
+      {/* Film grain — unifies the canvas with the background. */}
       <div aria-hidden className="hero-grain pointer-events-none absolute inset-0" />
 
       <div className="relative z-10 mx-auto w-full max-w-5xl">
@@ -48,7 +41,7 @@ export default function Hero() {
           {site.name}
         </h1>
         <p
-          className="hero-fade mt-3 font-display text-2xl font-medium tracking-tight text-gradient sm:text-3xl"
+          className="hero-fade mt-3 font-display text-2xl font-semibold tracking-[-0.01em] text-accent sm:text-3xl"
           style={{ animationDelay: "120ms" }}
         >
           Data Engineer
@@ -67,7 +60,7 @@ export default function Hero() {
         >
           <a
             href="#projects"
-            className="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-3 text-sm font-semibold text-accent-ink shadow-[0_8px_30px_-12px_rgba(56,189,248,0.6)] transition-transform hover:-translate-y-0.5"
+            className="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-3 text-sm font-semibold text-accent-ink shadow-[0_8px_30px_-14px_rgba(244,168,58,0.55)] transition-transform hover:-translate-y-0.5"
           >
             View flagship projects
             <span aria-hidden>→</span>
@@ -81,21 +74,18 @@ export default function Hero() {
           <TerminalLauncher />
         </div>
 
-        {/* Stats — real, verified, no application counts. */}
+        {/* Verified numbers as an instrument readout — not a card grid. */}
         <dl
-          className="hero-fade mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-line bg-line lg:grid-cols-4"
+          className="hero-fade mt-12 grid grid-cols-2 gap-x-8 gap-y-8 border-t border-line/70 pt-9 sm:mt-14 sm:flex sm:flex-wrap sm:gap-x-14"
           style={{ animationDelay: "320ms" }}
         >
           {stats.map((s) => (
-            <div key={s.label} className="bg-surface px-5 py-5">
-              <dt className="sr-only">{s.label}</dt>
-              <dd>
-                <span className="block font-display text-2xl font-semibold tracking-tight text-fg sm:text-3xl">
-                  {s.value}
-                </span>
-                <span className="mt-1 block text-[13px] leading-snug text-muted">{s.label}</span>
-                <span className="mt-1 block font-mono text-[11px] text-faint">{s.sub}</span>
+            <div key={s.label} className="max-w-[15rem]">
+              <dt className="font-mono text-[11px] leading-snug text-faint">{s.label}</dt>
+              <dd className="mt-1.5 font-display text-[1.7rem] font-semibold leading-none tracking-[-0.01em] text-accent sm:text-[2rem]">
+                {s.value}
               </dd>
+              <dd className="mt-1 font-mono text-[11px] text-faint">{s.sub}</dd>
             </div>
           ))}
         </dl>

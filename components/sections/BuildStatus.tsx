@@ -86,7 +86,7 @@ export default async function BuildStatus() {
       <div className="overflow-hidden rounded-xl border border-line bg-surface/60">
         {/* Panel header */}
         <div className="flex items-center justify-between gap-3 border-b border-line/70 px-5 py-3.5">
-          <span className="font-mono text-xs uppercase tracking-[0.18em] text-faint">
+          <span className="font-mono text-xs tracking-tight text-faint">
             build status
           </span>
           <span className="flex items-center gap-2">

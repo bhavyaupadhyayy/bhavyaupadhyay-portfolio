@@ -21,7 +21,7 @@ export function Node({
     : store
       ? "border-line-strong bg-surface-2 text-fg"
       : terminal
-        ? "border-accent-2/40 bg-[rgba(129,140,248,0.08)] text-fg"
+        ? "border-accent/35 bg-[rgba(244,168,58,0.07)] text-fg"
         : "border-line-strong bg-surface text-muted";
   return <div className={`${base} ${tone}`}>{children}</div>;
 }
